@@ -11,6 +11,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7/7 課程內容</title>
     <style>
+
+        .hamburger-structure {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+}
+
+.hamburger-layer {
+    padding: 12px 20px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.hamburger-layer:hover {
+    transform: scale(1.02);
+}
+
+/* 上層麵包 */
+.top-bun {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    border-radius: 15px 15px 0 0;
+    color: #7c2d12;
+    padding: 15px 20px;
+}
+
+/* 中間餡料 */
+.filling {
+    background: linear-gradient(135deg, #86efac, #4ade80);
+    border-top: 3px dashed #16a34a;
+    border-bottom: 3px dashed #16a34a;
+    padding: 18px 20px;
+    color: #14532d;
+}
+
+/* 下層麵包 */
+.bottom-bun {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    border-radius: 0 0 15px 15px;
+    color: #7c2d12;
+    padding: 15px 20px;
+}
+
+.layer-title {
+    font-size: 1.0em;
+    font-weight: bold;
+    margin: 0 0 6px 0;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.layer-subtitle {
+    font-size: 0.85em;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    opacity: 0.9;
+}
+
+.layer-description {
+    font-size: 0.75em;
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.3;
+}
+
+.filling-details {
+    margin: 12px 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    font-size: 0.7em;
+}
+
+.filling-details li {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 4px 6px;
+    border-radius: 10px;
+    border: 1px solid rgba(22, 163, 74, 0.3);
+}
+
+/* 響應式設計 */
+@media (max-width: 480px) {
+    .hamburger-structure {
+        max-width: 320px;
+    }
+    
+    .hamburger-layer {
+        padding: 15px;
+    }
+    
+    .filling-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 添加一些動畫效果 */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hamburger-structure {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* 互動效果 */
+.hamburger-layer {
+    cursor: pointer;
+}
+
+.hamburger-layer:active {
+    transform: scale(0.98);
+}
+
+/* 添加小裝飾元素 */
+.top-bun::before,
+.bottom-bun::before {
+    content: '🍞';
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 1.2em;
+    opacity: 0.6;
+}
+
+.filling::before {
+    content: '🥬';
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 1.2em;
+    opacity: 0.7;
+}
         /* 網站整體風格設計 */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Noto Sans TC";
@@ -141,7 +285,7 @@
             padding: 15px;
             margin: 20px 0;
         }
-
+ 
         /* 紅色強調文字樣式 */
         .highlight-red {
             color: #dc3545;
@@ -165,7 +309,6 @@
 
     <main>
         <section class="card">
-            <div class="image-placeholder">[圖片示意：講師分享螢幕的畫面，顯示課程目錄]</div>
             <h2>學測英文作文：考的是作文，還是段落？</h2>
             
             <h3>課程目錄 (Table of contents)</h3>
@@ -257,7 +400,33 @@
         
         <section class="card">
             <h2>02. 教學段落寫作：英文段落的黃金結構</h2>
-            <div class="image-placeholder">[圖示示意：一個漢堡，包含開頭(Top Bun)、發展(Filling)、結尾(Bottom Bun)]</div>
+            <div class="max-w-md mx-auto text-center bg-white rounded-2xl overflow-hidden shadow-2xl">
+<div class="hamburger-structure">
+    <div class="hamburger-layer top-bun">
+        <h4 class="layer-title">上層麵包 (開頭)</h4>
+        <p class="layer-subtitle">主題句 (Topic Sentence)</p>
+        <p class="layer-description">點出段落中心思想</p>
+    </div>
+    
+    <div class="hamburger-layer filling">
+        <h4 class="layer-title">中間餡料 (發展)</h4>
+        <p class="layer-subtitle">支持句 (Supporting Sentences)</p>
+        <p class="layer-description">提供細節、解釋、範例來豐富主題句</p>
+        <ul class="filling-details">
+            <li>explanations: 解釋說明</li>
+            <li>facts: 事實</li>
+            <li>reasons: 原因</li>
+            <li>examples: 舉例</li>
+            <li>statistics: 統計數字</li>
+        </ul>
+    </div>
+    
+    <div class="hamburger-layer bottom-bun">
+        <h4 class="layer-title">下層麵包 (結尾)</h4>
+        <p class="layer-subtitle">結論句 (Concluding Sentence)</p>
+        <p class="layer-description">總結前文、重申主旨</p>
+    </div>
+</div>
             <ul>
                 <li><strong>開頭 / 主題句 (Topic Sentence):</strong> 點明段落核心思想。</li>
                 <li><strong>發展 / 支持句 (Supporting Sentences):</strong> 用細節來支撐主題句。
@@ -280,6 +449,7 @@
                 <strong>教學重點：</strong> 指令越清晰，AI 的回饋越有用。我們可以透過「CEFR 語言分級」來向 AI 要求不同難度的句子。
             </div>
              <h4>情境：103年指考圖表寫作</h4>
+             <img src="77 figure.png" alt="103年指考圖表寫作範例" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: 20px 0; display: block; margin-left: auto; margin-right: auto;">
              <blockquote><strong>指令：</strong> 「下圖呈現的是某國高中生每天進行各項活動的時間分配，第一段描述該圖所呈現之一般性現象，不必提及特定數據。請用A2及B1的英文程度各寫5個句子。」</blockquote>
             
             <h4>AI 生成結果分析：</h4>
@@ -305,6 +475,7 @@
         <section class="card">
             <h2>從 AI 回應中，提煉核心主題句</h2>
             <h4>情境：103年看圖寫作</h4>
+            <img src="77 figure 2.png" alt="103年指考圖表寫作範例" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: 20px 0; display: block; margin-left: auto; margin-right: auto;">
             <blockquote><strong>指令：</strong> 「請為此四格漫畫故事寫5個主題句」</blockquote>
 
             <h4>較難的主題句 (適合進階思考)</h4>
@@ -328,7 +499,7 @@
 
         <section class="card">
             <h2>實戰拆解：112年表情符號作文 (第一段)</h2>
-            <div class="image-placeholder">[圖片示意：四個表情符號，分別是笑臉、生氣臉、眨眼笑臉、無奈笑臉]</div>
+            <img src="77 figure 3.png" alt="103年指考圖表寫作範例" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: 20px 0; display: block; margin-left: auto; margin-right: auto;">
             <blockquote><strong>題目：</strong> 隨著社群媒體的普及,表情符號(emoji)的使用也極為普遍。請參考下列表情符號,寫一篇英文作文,文分兩段。第一段說明人們何以喜歡使用表情符號,並從下列的表情符號中舉一至二例,說明表情符號在溝通上有何功能。第二段則以個人或親友的經驗為例,討論表情符號在訊息表達或解讀上可能造成的誤會或困擾,並提出可以化解的方法。</blockquote>
             
             <h4>第一步：選擇最佳主題句</h4>
@@ -376,6 +547,7 @@
 
         <section class="card">
             <h2>整合練習：109年指考「校園安全」作文</h2>
+            <img src="77 figure 4.png" alt="103年指考圖表寫作範例" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: 20px 0; display: block; margin-left: auto; margin-right: auto;">
             <blockquote><strong>題目：</strong> 校園安全是校內全體成員的共同責任。請以此為題,寫一篇英文作文,討論校園安全的重要性及維護之道。文分兩段。第一段說明校園安全的重要性及校園內可能發生的安全問題;第二段說明身為校園的一份子,你覺得校內成員應該採取那些作為以維護校園安全。</blockquote>
             
             <h4>寫作鷹架 (Framework)</h4>
