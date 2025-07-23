@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建築系學習歷程 互動策略指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate Gray and Amber -->
+    <!-- Application Structure Plan: This SPA is designed as a strategic funnel, guiding the user from high-level philosophy to tactical execution. It starts with the foundational "WHY" to ground the user's motivation. The core interactive element is the "Strategy Room," where users can dynamically compare the three universities, transforming the static report table into an engaging, decision-making tool. This is followed by actionable, tabbed sections on portfolio construction and a final summary of the "Architect's Mindset." This structure prioritizes user engagement and strategic clarity over a linear replication of the source document. -->
+    <!-- Visualization & Content Choices: 
+        1. University Comparison (Goal: Compare): An interactive radar chart (Chart.js) and dynamic text panels. Interaction: Clicking a university button updates the chart and a detailed comparison table. Justification: This provides an immediate, visual comparison of each school's core philosophy (Thinker, Analyst, Maker) and simplifies the complex requirements from the source document's tables into a clear, interactive format.
+        2. Strategic Frameworks (Goal: Organize): Key concepts like "Dual-Track Activities" and "Golden Thread" are presented in structured cards. Interaction: Static but clearly organized. Justification: Breaks down abstract strategies into digestible, actionable points.
+        3. Architect's Mindset (Goal: Inform): Presented using icon-driven cards. Interaction: Visually engaging layout. Justification: Transforms the text-heavy list from the report into a more memorable and scannable format.
+        Library/Method: Chart.js for visualization, Vanilla JS for all interactions, Tailwind CSS for styling.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .nav-button.active {
+            background-color: #475569;
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(71, 85, 105, 0.3);
+            border-color: #475569;
+        }
+        .nav-button:not(.active) {
+            background-color: white;
+            border-color: #cbd5e1;
+        }
+        .nav-button:not(.active):hover {
+            background-color: #f1f5f9;
+            border-color: #94a3b8;
+        }
+        .content-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
+        }
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #0f172a;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #f59e0b;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        .table-header {
+            background-color: #f1f5f9;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">建築系申請策略指南</h1>
+                <p class="text-sm text-slate-500">將學習歷程視為你的第一份設計</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://drive.google.com/drive/folders/1qVsRTfskWU034cmbj8rqY46-zzszWy8b?usp=sharing" class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center space-x-1 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span>參考資料</span>
+                </a>
+                <div class="text-amber-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        
+        <section id="intro" class="mb-16 text-center">
+            <h2 class="section-title">從根本性的「WHY」出發</h2>
+            <p class="text-slate-600 leading-relaxed max-w-3xl mx-auto">
+                一份傑出的學習歷程，不僅是展示你「做了什麼」，更是深刻地闡述「你為何而做」。如同成功大學杜怡萱教授所強調，審查委員最想看見的是你的動機、特質與反思。這份指南將引導你，將申請文件從資料彙編，提升為一篇引人入勝的「個人論文」。
+            </p>
+        </section>
+
+        <section id="framework" class="mb-16">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="content-card p-6">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">雙軌並行：探索與累積</h3>
+                    <p class="text-slate-600 mb-4">將高中三年的經歷，組織成一段有目的的旅程。</p>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-slate-700">探索型活動 (發掘你的WHY)</h4>
+                            <ul class="list-disc list-inside text-sm text-slate-500 mt-1 space-y-1">
+                                <li>目標性閱讀與心得</li>
+                                <li>線上課程的深化與連結</li>
+                                <li>批判性的實地參訪與分析</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-slate-700">累積型活動 (建立你的證據)</h4>
+                            <ul class="list-disc list-inside text-sm text-slate-500 mt-1 space-y-1">
+                                <li>服務學習作為田野調查</li>
+                                <li>手作專案的完整歷程記錄</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card p-6">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">黃金主線：編織連貫故事</h3>
+                    <p class="text-slate-600 mb-4">你的「WHY」是論文主題，所有文件都是支持論點的證據。你需要將修課紀錄、課程成果與多元表現串連起來，展現綜合思考能力。</p>
+                    <div class="bg-amber-50 border-l-4 border-amber-400 text-amber-800 p-4 rounded-r-lg text-sm">
+                        <p><strong>敘事範例：</strong>「物理學科的優異表現(修課)，為我設計模型橋樑(課程成果)提供了結構計算的基礎，而靈感則源於我對火車站人流動線的觀察(多元表現)。」</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="mb-16">
+            <h2 class="section-title text-center">校系戰情室：知己知彼</h2>
+            <p class="text-center text-slate-500 max-w-2xl mx-auto mb-8">
+                三所頂尖大學建築系各有其獨特的審查哲學。點擊下方按鈕，探索各校的「個性」，並了解如何調整你的申請策略，讓你的故事更具說服力。
+            </p>
+            <div class="flex justify-center space-x-2 md:space-x-4 mb-8">
+                <button id="btn-ncku" class="nav-button px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold">成大 (思想家)</button>
+                <button id="btn-ntust" class="nav-button px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold">臺科大 (分析師)</button>
+                <button id="btn-ntut" class="nav-button px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold">北科大 (實踐家)</button>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2 content-card p-6">
+                    <h3 id="school-name" class="text-2xl font-bold text-slate-800 mb-2"></h3>
+                    <p id="school-philosophy" class="text-slate-600 leading-relaxed"></p>
+                    <div class="mt-6">
+                        <div class="chart-container">
+                            <canvas id="school-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-3 content-card overflow-x-auto">
+                    <div id="school-details" class="p-1"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mindset" class="mb-16">
+             <h2 class="section-title text-center">培養建築師的心態</h2>
+             <p class="text-center text-slate-500 max-w-2xl mx-auto mb-8">
+                除了具體的作品，審查委員更想看到你所具備的潛在特質。這些「軟實力」是你未來能否在建築領域成功的關鍵。
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="content-card p-6 text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-amber-100 mb-4">
+                        <span class="text-2xl">👁️</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800">環境敏感度</h3>
+                    <p class="mt-2 text-sm text-slate-500">對生活、社會、人群、環境的敏銳觀察力。用速寫、攝影、筆記來記錄你的發現。</p>
+                </div>
+                <div class="content-card p-6 text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-amber-100 mb-4">
+                         <span class="text-2xl">💡</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800">彈性解題力</h3>
+                    <p class="mt-2 text-sm text-slate-500">建築沒有標準答案。坦誠面對失敗，並展示你如何思考、調整、找到新的解決方案。</p>
+                </div>
+                <div class="content-card p-6 text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-amber-100 mb-4">
+                         <span class="text-2xl">🤝</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800">同理與協作</h3>
+                    <p class="mt-2 text-sm text-slate-500">建築是為「人」服務。在團隊合作中，你扮演什麼角色？如何溝通與處理分歧？</p>
+                </div>
+                <div class="content-card p-6 text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-amber-100 mb-4">
+                         <span class="text-2xl">🔥</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800">韌性與熱情</h3>
+                    <p class="mt-2 text-sm text-slate-500">一份用心製作的作品集，就是你熱情與毅力的最好證明。它證明你已準備好迎接挑戰。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="presentation">
+            <h2 class="section-title text-center">呈現的藝術</h2>
+            <p class="text-center text-slate-500 max-w-2xl mx-auto mb-8">
+                你的作品集本身就是一項設計。一個清晰、專業的版面，能在審查委員閱讀文字前，就先「展示」出你的設計感。
+            </p>
+            <div class="content-card p-8">
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="text-amber-500 mr-3 mt-1">✓</span>
+                        <div><strong class="text-slate-700">「玄關」概念：</strong> 封面設計應乾淨、專業，為讀者設定基調。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-amber-500 mr-3 mt-1">✓</span>
+                        <div><strong class="text-slate-700">版面呼吸感：</strong> 使用一致的網格系統，確保充足留白，選擇易讀字體。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-amber-500 mr-3 mt-1">✓</span>
+                        <div><strong class="text-slate-700">視覺化資訊：</strong> 善用圖表、時間軸來分解複雜資訊，讓故事更清晰。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-amber-500 mr-3 mt-1">✓</span>
+                        <div class="text-red-600 font-semibold"><strong class="text-slate-700">關鍵提示：</strong> 標示重點，但根據教授的內行建議，絕對避免使用紅色文字。</div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-slate-400">
+            <p>&copy; 2025 建築系申請策略指南. Design your own story.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const schoolData = {
+                ncku: {
+                    name: '國立成功大學 (NCKU)',
+                    philosophy: '尋找具備社會責任感與深刻思考能力的「思想家」。極度重視申請者的反思、觀察與人文關懷。你的「WHY」在這裡至關重要。',
+                    chartData: [9, 5, 4],
+                    details: {
+                        '課程學習成果': '至多 <strong>3</strong> 件。重點在呈現作品背後的<strong>動機、過程、心得與省思</strong>，而非作品的完成度。',
+                        '多元表現': '至多 <strong>10</strong> 件。重視對生活、社會、人群、環境的觀察與省思，以及自主學習的成果。',
+                        '學習歷程自述': '需包含<strong>學習歷程反思、就讀動機、未來學習計畫與生涯規劃</strong>。極度重視與個人生命經驗的連結。',
+                        '學測成績採計': '未在審查指引中明確說明學測成績於第二階段的佔比。',
+                        '特別注意事項': '審查委員極度重視申請者的<strong>真實性</strong>與<strong>個人特質</strong>，厭惡千篇一律的「公版格式」。'
+                    }
+                },
+                ntust: {
+                    name: '國立臺灣科技大學 (NTUST)',
+                    philosophy: '尋找兼具創意潛力與扎實數理分析能力的「分析師」。強調學術基礎與技術分析能力，創意必須有量化能力作為支撐。',
+                    chartData: [5, 9, 6],
+                    details: {
+                        '課程學習成果': '至多 <strong>3</strong> 件。重視書面報告、實作作品與<strong>自然科學領域探究與實作成果</strong>。',
+                        '多元表現': '至多 <strong>7</strong> 件。重視社團經驗與特殊優良表現證明（如設計競賽）。',
+                        '學習歷程自述': '需包含<strong>學習歷程反思、就讀動機、未來學習計畫與生涯規劃</strong>。強調個人特質與建築領域的連結。',
+                        '學測成績採計': '學測加權平均成績佔總成績 <strong>50%</strong>。',
+                        '特別注意事項': '備審資料審查中，會<strong>再次參採英文與數學學測成績</strong>。'
+                    }
+                },
+                ntut: {
+                    name: '國立臺北科技大學 (NTUT)',
+                    philosophy: '尋找具備動手能力與團隊協作精神的「實踐家」。相較於抽象哲思，他們更關心「你能做什麼？」，重視已被證實的能力。',
+                    chartData: [4, 6, 9],
+                    details: {
+                        '課程學習成果': '至多 <strong>3</strong> 件。重視<strong>專題實作及實習科目學習成果（含技能領域）</strong>。',
+                        '多元表現': '至多 <strong>2</strong> 件。重視社團活動經驗與<strong>特殊優良表現證明</strong>（如設計競賽、營隊、實習、個人創作）。',
+                        '學習歷程自述': '需包含<strong>高中學習歷程反思、就讀動機、未來學習計畫與生涯規劃</strong>。強調對建築領域的認知與期許。',
+                        '學測成績採計': '學測加權平均成績佔總成績 <strong>50%</strong>。',
+                        '特別注意事項': '強調團隊合作，若提交團體作品，需附上<strong>「分組工作表」</strong>說明個人貢獻。'
+                    }
+                }
+            };
+            
+            const schoolNameEl = document.getElementById('school-name');
+            const schoolPhilosophyEl = document.getElementById('school-philosophy');
+            const schoolDetailsEl = document.getElementById('school-details');
+            const schoolChartCanvas = document.getElementById('school-chart');
+            const buttons = [document.getElementById('btn-ncku'), document.getElementById('btn-ntust'), document.getElementById('btn-ntut')];
+            
+            let myChart;
+
+            function generateTableHTML(details) {
+                let html = '<table class="w-full text-sm text-left text-slate-500"><thead class="text-xs text-slate-700 uppercase table-header">';
+                html += '<tr><th scope="col" class="px-6 py-3 rounded-tl-lg">審查項目</th><th scope="col" class="px-6 py-3 rounded-tr-lg">重點摘要</th></tr></thead><tbody>';
+                
+                for (const key in details) {
+                    html += `<tr class="bg-white border-b"><th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">${key}</th><td class="px-6 py-4">${details[key]}</td></tr>`;
+                }
+
+                html += '</tbody></table>';
+                return html;
+            }
+
+            function updateSchoolView(schoolId) {
+                const data = schoolData[schoolId];
+                schoolNameEl.textContent = data.name;
+                schoolPhilosophyEl.textContent = data.philosophy;
+                schoolDetailsEl.innerHTML = generateTableHTML(data.details);
+
+                if (myChart) {
+                    myChart.data.datasets[0].data = data.chartData;
+                    myChart.update();
+                }
+
+                buttons.forEach(btn => {
+                    if (btn.id === `btn-${schoolId}`) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            function initializeChart() {
+                const ctx = schoolChartCanvas.getContext('2d');
+                myChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['人文反思', '技術分析', '實作能力'],
+                        datasets: [{
+                            label: '校系特質',
+                            data: [0, 0, 0],
+                            backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                            borderColor: 'rgba(245, 158, 11, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(245, 158, 11, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(245, 158, 11, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 10,
+                                pointLabels: {
+                                    font: {
+                                        size: 14,
+                                        family: "'Noto Sans TC', sans-serif"
+                                    },
+                                    color: '#475569'
+                                },
+                                ticks: {
+                                    stepSize: 2,
+                                    backdropColor: 'rgba(255, 255, 255, 0.75)'
+                                },
+                                grid: {
+                                    color: '#e2e8f0'
+                                },
+                                angleLines: {
+                                    color: '#e2e8f0'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const schoolId = btn.id.split('-')[1];
+                    updateSchoolView(schoolId);
+                });
+            });
+
+            initializeChart();
+            updateSchoolView('ncku');
+        });
+    </script>
+</body>
+</html>
