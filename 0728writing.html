@@ -129,6 +129,38 @@
             font-size: 0.9em;
             color: #7f8c8d;
         }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                line-height: 1.7;
+            }
+            .container {
+                padding: 20px;
+                margin: 10px auto;
+                box-shadow: none;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 1.2em;
+            }
+            nav div {
+                flex-direction: column;
+                align-items: center;
+            }
+            .rubric-table,
+            .analysis-section table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
     </style>
 </head>
 <body>
