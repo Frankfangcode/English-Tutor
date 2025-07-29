@@ -127,6 +127,40 @@
         #next-btn:hover {
             background-color: #2980b9;
         }
+        /* --- 響應式設計 (Responsive Web Design) --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px; /* 在詞彙和註解之間增加一點間距 */
+            }
+            .note {
+                margin-left: 0; /* 移除在電腦版上的左邊距 */
+            }
+            .quiz-section {
+                padding: 20px;
+            }
+            #question {
+                font-size: 1.3em;
+            }
+            .option-btn {
+                padding: 12px;
+                font-size: 1em;
+            }
+        }
+
     </style>
 </head>
 <body>
