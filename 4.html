@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英文時態練習</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .options {
+            margin: 10px 0;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>英文時態練習</h1>
+
+        <div class="question">
+            你想表達「我每天早上都吃早餐」，是一個習慣，不限定特定時間。  
+            應該用哪個時態？
+        </div>
+
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="tense" value="present_simple"> 現在簡單式
+            </label>
+            <label class="option">
+                <input type="radio" name="tense" value="past_simple"> 過去簡單式
+            </label>
+            <label class="option">
+                <input type="radio" name="tense" value="future_simple"> 未來簡單式
+            </label>
+        </div>
+
+        <button onclick="checkAnswer()">提交答案</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            let selectedOption = document.querySelector('input[name="tense"]:checked');
+
+            if (!selectedOption) {
+                alert("請選擇一個時態！");
+                return;
+            }
+
+            let result = document.getElementById('result');
+            if (selectedOption.value === "present_simple") {
+                result.textContent = "正確！應該使用現在簡單式。例句: I eat breakfast every morning.";
+                result.style.color = "green";
+            } else {
+                result.textContent = "錯誤！正確答案是現在簡單式。";
+                result.style.color = "red";
+            }
+            result.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>

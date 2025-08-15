@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>擺脫直翻，建立英文思維｜120 分鐘完整課程頁面</title>
+  <meta name="description" content="用語塊、情境與文化對齊打造自然英語：120 分鐘教學頁面，含示例、練習與作業。" />
+  <style>
+    :root{
+      --bg:#0b0c10;          /* 背景深色 */
+      --panel:#111319;       /* 卡片底色 */
+      --muted:#8a8f98;       /* 次要文字 */
+      --text:#eef2f7;        /* 主要文字 */
+      --brand:#62d8ff;       /* 重點色 */
+      --accent:#c4f373;      /* 輔助重點 */
+      --code:#1a1f2b;        /* 代碼/表格底 */
+      --line:#1e222d;        /* 邊界線 */
+      --ok:#8ef0a6;
+      --warn:#ffd27a;
+      --bad:#ff9ca3;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* Header */
+    header.hero{position:relative;overflow:hidden;border-radius:20px;background:radial-gradient(1200px 400px at 10% -10%, #122036 0%, transparent 60%),
+                                              radial-gradient(800px 300px at 90% 10%, #1a2c47 0%, transparent 60%),
+                                              linear-gradient(180deg,#0f1420 0%, #0b0c10 100%)}
+    .hero-inner{padding:56px 28px; display:grid; gap:14px}
+    .eyebrow{display:inline-flex;gap:10px;align-items:center;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;backdrop-filter:blur(2px)}
+    .title{font-size:42px;line-height:1.15;margin:6px 0 2px;font-weight:800;letter-spacing:0.2px}
+    .subtitle{color:var(--muted);max-width:720px}
+    .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--text);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn.primary{background:linear-gradient(180deg, #1d2739, #162033);border-color:#223049}
+    .btn:hover{filter:brightness(1.08)}
+
+    /* Layout */
+    .layout{display:grid;grid-template-columns:280px 1fr;gap:22px;margin-top:24px}
+    @media (max-width: 900px){.layout{grid-template-columns:1fr}}
+
+    /* TOC */
+    nav.toc{position:sticky;top:16px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+    nav.toc h3{margin:0 0 8px;font-size:14px;color:var(--muted);letter-spacing:0.4px}
+    .toc a{display:block;padding:8px 10px;border-radius:10px;color:var(--text);border:1px solid transparent}
+    .toc a:hover{background:#0f1320;border-color:var(--line)}
+    .toc a.active{background:#0e1726;border-color:#223049;box-shadow:0 0 0 1px #1e2a42 inset}
+
+    /* Card */
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:16px}
+    .card h2{font-size:22px;margin:6px 0 10px}
+    .card h3{font-size:18px;margin:8px 0 6px}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+
+    /* Grid & table */
+    .grid{display:grid;gap:12px}
+    .grid.two{grid-template-columns:1fr 1fr}
+    .grid.three{grid-template-columns:repeat(3,1fr)}
+    @media (max-width: 800px){.grid.two,.grid.three{grid-template-columns:1fr}}
+
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:var(--code)}
+    th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+    th{color:#cfe0ff;text-align:left;background:#121726;position:sticky;top:0}
+    tr:last-child td{border-bottom:0}
+    code, .chip{background:var(--code);border:1px solid var(--line);padding:3px 8px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-size:13px}
+    .chip{display:inline-flex;align-items:center;gap:6px}
+
+    /* Callouts */
+    .callout{border:1px dashed #2a3853;border-radius:14px;padding:12px;background:#0f1523}
+    .callout.ok{border-color:#2b4e3b;background:#0f1a15}
+    .callout.warn{border-color:#5a4b24;background:#17140d}
+
+    /* Accordion */
+    details{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--panel)}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;list-style:none;font-weight:700}
+    summary::-webkit-details-marker{display:none}
+
+    /* Footer */
+    footer{color:var(--muted);text-align:center;padding:32px 0}
+
+    /* Print */
+    @media print{
+      .layout{grid-template-columns:1fr}
+      nav.toc, .hero-cta{display:none}
+      header.hero{box-shadow:none}
+      .card{break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="hero-inner">
+        <span class="eyebrow">🎯 擺脫直翻｜建立英文思維｜120 分鐘</span>
+        <h1 class="title">用語塊與情境，說出自然英文</h1>
+        <p class="subtitle">理解文化差異、擺脫翻譯腔、用母語者的固定搭配與語塊表達。在日常情境中自然使用至少 20 個高頻語塊。</p>
+        <div class="hero-cta">
+          <button class="btn primary" onclick="document.querySelector('#goals').scrollIntoView({behavior:'smooth'})">開始閱讀</button>
+          <button class="btn" onclick="window.print()">🖨️ 下載/列印講義</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="toc" id="toc">
+        <h3>課程導覽</h3>
+        <a href="#goals">課程目標</a>
+        <a href="#p0">0–10：破題</a>
+        <a href="#p1">10–25：概念缺口與改寫</a>
+        <a href="#p2">25–45：語塊養成</a>
+        <a href="#p3">45–65：翻譯腔修正</a>
+        <a href="#p4">65–85：情境速寫</a>
+        <a href="#p5">85–105：文化詞轉換</a>
+        <a href="#p6">105–120：總結與作業</a>
+      </nav>
+
+      <main>
+        <!-- 目標 -->
+        <section id="goals" class="card">
+          <h2>課程目標</h2>
+          <ul>
+            <li>理解語言的文化概念差異，知道「中文有、英文沒有直對應」的情況。</li>
+            <li>學會用英文母語者的<strong>固定搭配</strong>與<strong>語塊</strong>表達，而非先想中文再翻譯。</li>
+            <li>聽得出並修正翻譯腔與配音腔。</li>
+            <li>能在日常情境中自然使用至少 <strong>20 個高頻語塊</strong>。</li>
+          </ul>
+          <div class="meta"><span class="chip">⏱️ 120 分鐘</span><span class="chip">👥 適合：中級以上一般學習者</span><span class="chip">🎧 建議：可結合影子跟讀</span></div>
+        </section>
+
+        <!-- 0–10 破題 -->
+        <section id="p0" class="card">
+          <h2>0–10 分鐘：破題與動機引導</h2>
+          <p class="callout warn"><strong>引導問題：</strong>「發財的英文是什麼？」— 無論回答 <em>get rich</em> 或答不出，都引導學生理解：英文沒有「發財」這種一鍵對應詞，需依<strong>情境</strong>換說法。</p>
+          <h3>「發財」依情境的自然說法</h3>
+          <table>
+            <thead><tr><th>中文情境</th><th>自然英文</th><th>語氣/備註</th></tr></thead>
+            <tbody>
+              <tr><td>突然致富</td><td><code>strike it rich</code></td><td>常帶有幸運成分</td></tr>
+              <tr><td>變有錢（一般）</td><td><code>get rich</code></td><td>中性、直接</td></tr>
+              <tr><td>中大獎/大成功</td><td><code>hit the jackpot</code></td><td>可比喻性使用</td></tr>
+              <tr><td>賺進大筆財富</td><td><code>make a fortune</code></td><td>較正式/書面</td></tr>
+              <tr><td>很有錢（口語）</td><td><code>be loaded</code></td><td>非正式、輕鬆</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 10–25 概念缺口與策略 -->
+        <section id="p1" class="card">
+          <h2>10–25 分鐘：文化概念缺口與改寫策略</h2>
+          <div class="grid two">
+            <div>
+              <h3>常見中文文化詞 → 自然英文</h3>
+              <table>
+                <thead><tr><th>中文</th><th>自然英文語塊</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>孝順</td>
+                    <td>
+                      <div class="grid">
+                        <span class="chip">filial piety（正式）</span>
+                        <span class="chip">be good to my parents</span>
+                        <span class="chip">take care of my parents</span>
+                        <span class="chip">be there for my folks</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr><td>加油</td><td class="grid">
+                    <span class="chip">You got this.</span>
+                    <span class="chip">Hang in there.</span>
+                    <span class="chip">I’m rooting for you.</span>
+                    <span class="chip">Go for it.</span>
+                  </td></tr>
+                  <tr><td>辛苦了</td><td class="grid">
+                    <span class="chip">Thanks for your hard work.</span>
+                    <span class="chip">I know it’s been a long day.</span>
+                    <span class="chip">I really appreciate this.</span>
+                  </td></tr>
+                  <tr><td>方便嗎</td><td class="grid">
+                    <span class="chip">Is now a good time?</span>
+                    <span class="chip">Does this time work for you?</span>
+                  </td></tr>
+                  <tr><td>隨便</td><td class="grid">
+                    <span class="chip">I’m easy.</span>
+                    <span class="chip">Up to you.</span>
+                    <span class="chip">Whatever works.</span>
+                  </td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h3>六種改寫策略</h3>
+              <ol>
+                <li><strong>具體化</strong>：將抽象詞變成具體行動。</li>
+                <li><strong>情境化</strong>：交代人物、對象、時間、地點。</li>
+                <li><strong>語塊化</strong>：用常見搭配而非單字堆砌。</li>
+                <li><strong>範疇調整</strong>：過窄則一般化、過廣則細化。</li>
+                <li><strong>例證法</strong>：用例子說明概念。</li>
+                <li><strong>借詞＋解釋</strong>：必要時用正式詞並補一句解釋。</li>
+              </ol>
+              <div class="callout">
+                <strong>小練習：</strong>把「孝順」換成：<em>I try to be there for my folks. I check in every weekend and handle the errands.</em>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 25–45 語塊養成 -->
+        <section id="p2" class="card">
+          <h2>25–45 分鐘：語塊養成與搭配敏感度</h2>
+          <div class="grid two">
+            <div>
+              <h3>核心語塊庫（部分）</h3>
+              <table>
+                <thead><tr><th>類別</th><th>語塊</th></tr></thead>
+                <tbody>
+                  <tr><td>金錢成就</td><td>make a living ／ make a name for oneself</td></tr>
+                  <tr><td>學習思考</td><td>wrap my head around… ／ It feels like…</td></tr>
+                  <tr><td>社交客氣</td><td>I appreciate you… ／ If it’s not too much trouble…</td></tr>
+                  <tr><td>建議委婉</td><td>You might want to… ／ How about we…</td></tr>
+                  <tr><td>不確定</td><td>I’m not sure if… ／ As far as I know…</td></tr>
+                  <tr><td>喜好選擇</td><td>I’m good with either. ／ I’m leaning toward…</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h3>練習法</h3>
+              <details open>
+                <summary>🎤 影子跟讀（切語塊）</summary>
+                <p>“<strong>I’d appreciate it</strong> // <strong>if you could send the file</strong> // <strong>today</strong>.”</p>
+              </details>
+              <details>
+                <summary>🔁 最小替換</summary>
+                <p><code>make a living as a designer</code> → <code>make a living as a translator</code></p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <!-- 45–65 翻譯腔修正 -->
+        <section id="p3" class="card">
+          <h2>45–65 分鐘：翻譯腔偵測與修正</h2>
+          <div class="grid two">
+            <div>
+              <h3>翻譯腔特徵</h3>
+              <ul>
+                <li>過度直譯的詞序與抽象名詞。</li>
+                <li>冗長客套，日常不會這樣說。</li>
+                <li>忽略語氣與省略，雖然字正確但不自然。</li>
+              </ul>
+              <div class="callout ok"><strong>三步修正法：</strong>聽（判斷情境） → 砍（刪冗） → 補（語氣、人稱）。</div>
+            </div>
+            <div>
+              <h3>改寫示例</h3>
+              <table>
+                <thead><tr><th>原句（翻譯腔）</th><th>自然英語</th></tr></thead>
+                <tbody>
+                  <tr><td>It has been extremely laborious for you.</td><td>Thanks for sticking with this.</td></tr>
+                  <tr><td>Please allow me to make a suggestion.</td><td>Maybe try this…</td></tr>
+                  <tr><td>I will immediately proceed to handle the matter.</td><td>I’ll take care of it right away.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 65–85 情境速寫 -->
+        <section id="p4" class="card">
+          <h2>65–85 分鐘：情境速寫與英英思考</h2>
+          <div class="grid two">
+            <div>
+              <h3>語言框架</h3>
+              <ul>
+                <li>I’m not sure if I can make it because…</li>
+                <li>If it helps, I can…</li>
+                <li>I’m rooting for you.</li>
+                <li>Let me know how it goes.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>情境練習</h3>
+              <ol>
+                <li>老闆臨時加會，你要婉拒。</li>
+                <li>朋友需要打氣。</li>
+                <li>家人健康檢查，你表達關心。</li>
+              </ol>
+              <div class="callout">
+                <strong>示例：</strong>
+                <p><em>I’m not sure if I can make it because I’m with a client. If it helps, I can send a quick summary now and join the next one.</em></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 85–105 文化詞轉換 -->
+        <section id="p5" class="card">
+          <h2>85–105 分鐘：文化詞轉換練習</h2>
+          <table>
+            <thead><tr><th>中文詞</th><th>自然英文說法（依情境）</th></tr></thead>
+            <tbody>
+              <tr><td>內捲</td><td>cutthroat competition ／ everyone trying to outdo one another</td></tr>
+              <tr><td>躺平</td><td>opting out of the rat race ／ taking a step back</td></tr>
+              <tr><td>儀式感</td><td>make it feel special ／ make a little ritual out of it</td></tr>
+              <tr><td>拍照打卡</td><td>snap a pic and post it ／ check in on Instagram</td></tr>
+              <tr><td>氣質</td><td>poise ／ presence ／ classy vibe</td></tr>
+            </tbody>
+          </table>
+          <div class="callout">
+            <strong>練習：</strong>選一詞，寫兩句英文並放入情境。
+            <p><em>We try to make birthdays feel special. We always cook together and make a little ritual out of it.</em></p>
+          </div>
+        </section>
+
+        <!-- 105–120 總結與作業 -->
+        <section id="p6" class="card">
+          <h2>105–120 分鐘：總結與作業</h2>
+          <div class="callout ok">
+            <p><strong>總結：</strong>今天學的是一種「說話系統」，不是單字清單。先想語塊，再填內容，表達就會自然。</p>
+          </div>
+          <div class="grid two">
+            <div>
+              <h3>作業</h3>
+              <ol>
+                <li>錄一段一分鐘語音，至少用今天學的五個語塊。</li>
+                <li>找出三個生活中「中文有、英文沒有」的詞，套用六種改寫策略，各寫兩句英文。</li>
+              </ol>
+            </div>
+            <div>
+              <h3>延伸使用</h3>
+              <ul>
+                <li>課堂可直接列印為講義（右上按鈕）。</li>
+                <li>將表格題改成 Google 表單做課後互動。</li>
+                <li>把「語塊庫」做成每日背誦小卡。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ/補充：教師提示 -->
+        <section class="card">
+          <h2>教師提示（可選）</h2>
+          <details>
+            <summary>如何帶學生擺脫「中文→英文」的直翻路徑？</summary>
+            <p>把「語塊」當成最小單位，先決定框架，再填入個人化資訊。例如先說 <em>“I’m not sure if…”</em>，再補理由與條件。</p>
+          </details>
+          <details>
+            <summary>如何偵測翻譯腔？</summary>
+            <p>抓「過度正式、抽象名詞堆疊、罕用句式」。用三步修正法：聽→砍→補。</p>
+          </details>
+        </section>
+
+        <footer>
+          <p>© 2025 英語語塊教學頁面 · 以可列印的單頁設計呈現</p>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // 目錄高亮
+    const tocLinks = [...document.querySelectorAll('#toc a')];
+    const sections = tocLinks.map(a => document.querySelector(a.getAttribute('href')));
+    const onScroll = () => {
+      const y = window.scrollY + 120;
+      let activeIndex = 0;
+      sections.forEach((sec, i) => { if (sec.offsetTop <= y) activeIndex = i; });
+      tocLinks.forEach((a,i)=> a.classList.toggle('active', i===activeIndex));
+    };
+    document.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  </script>
+</body>
+</html>

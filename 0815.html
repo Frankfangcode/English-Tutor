@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>擺脫中式英文！像母語者一樣自然思考與表達</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #005A9C; /* A professional blue */
+            --secondary-color: #017BFF;
+            --accent-color: #FFC107; /* A warm yellow for highlights */
+            --text-color: #333333;
+            --bg-color: #f8f9fa;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --container-width: 860px;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            font-size: 16px;
+        }
+
+        /* --- Layout & Container --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Header & Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+            border-bottom: 5px solid var(--accent-color);
+        }
+        .hero h1 { font-size: 2.8rem; margin: 0; font-weight: 700; }
+        .hero .subtitle { font-size: 1.2rem; opacity: 0.9; margin-top: 10px; }
+
+        /* --- Section Styling --- */
+        section {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            transition: all 0.3s ease-in-out;
+        }
+
+        h2 { font-size: 2rem; font-weight: 700; color: var(--primary-color); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+        h3 { font-size: 1.5rem; color: #333; margin-top: 30px; }
+        h4 { font-size: 1.2rem; font-weight: 500; }
+
+        .highlight { background-color: var(--accent-color); color: var(--primary-color); padding: 2px 8px; border-radius: 4px; font-size: 1.8rem; }
+        .key-takeaway { font-weight: 500; color: var(--primary-color); background-color: #e6f0ff; padding: 15px; border-radius: var(--border-radius); text-align: center; margin-top: 20px; }
+        .toolkit-box { background-color: #fffbeb; border: 1px solid #ffe58f; padding: 20px; border-radius: var(--border-radius); margin-top: 30px; }
+        .toolkit-box h3 { margin-top: 0; color: #d48806; }
+        ul, ol { padding-left: 25px; }
+        li { margin-bottom: 10px; }
+
+
+        /* --- INTERACTIVE: QUIZ --- */
+        .interactive-quiz { background-color: #f0f7ff; padding: 20px; border-radius: var(--border-radius); border-left: 4px solid var(--secondary-color); }
+        .interactive-quiz .question { font-weight: 700; }
+        .quiz-options { display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0; }
+        .quiz-option { background-color: white; border: 2px solid var(--secondary-color); color: var(--secondary-color); padding: 10px 15px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem; }
+        .quiz-option:hover { background-color: var(--secondary-color); color: white; }
+        .quiz-option.correct { background-color: var(--success-color); border-color: var(--success-color); color: white; }
+        .quiz-option.incorrect { background-color: var(--error-color); border-color: var(--error-color); color: white; }
+        .quiz-feedback { margin-top: 10px; font-weight: 700; min-height: 24px; transition: all 0.3s; }
+        .quiz-feedback.correct { color: var(--success-color); }
+        .quiz-feedback.incorrect { color: var(--error-color); }
+
+        /* --- INTERACTIVE: FLIP CARDS --- */
+        .flip-card-container { display: flex; justify-content: space-around; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .flip-card { background-color: transparent; width: 220px; height: 180px; perspective: 1000px; cursor: pointer; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card.is-flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: var(--border-radius); box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        .flip-card-front { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; font-size: 2rem; font-weight: 700; }
+        .flip-card-back { background-color: white; color: var(--text-color); transform: rotateY(180deg); }
+        .flip-card-back h4 { margin: 0 0 10px 0; color: var(--primary-color); font-size: 1.1rem; }
+        .flip-card-back p { font-size: 0.9rem; margin: 5px 0; line-height: 1.5; }
+
+        /* --- INTERACTIVE: TOGGLE SWITCH --- */
+        .toggle-container { margin-top: 30px; }
+        .toggle-item { display: flex; justify-content: space-between; align-items: center; background-color: #f8f9fa; padding: 15px; border-radius: var(--border-radius); margin-bottom: 15px; }
+        .toggle-item .texts { flex-grow: 1; overflow: hidden; }
+        .toggle-item .before, .toggle-item .after { margin: 0; transition: all 0.4s ease; }
+        .toggle-item .after { max-height: 0; opacity: 0; color: var(--success-color); font-weight: 500; }
+        .switch { position: relative; display: inline-block; width: 60px; height: 34px; margin-left: 20px; flex-shrink: 0; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--success-color); }
+        input:checked + .slider:before { transform: translateX(26px); }
+        .toggle-item.toggled .after { max-height: 150px; opacity: 1; }
+        .toggle-item.toggled .before { max-height: 0; opacity: 0; }
+
+
+        /* --- INTERACTIVE: ACCORDION --- */
+        .accordion-item { border: 1px solid #ddd; border-radius: var(--border-radius); margin-bottom: 10px; overflow: hidden; }
+        .accordion-item summary { font-size: 1.1rem; font-weight: 500; padding: 15px; cursor: pointer; background-color: #f8f9fa; position: relative; list-style: none; /* Hide default marker */ }
+        .accordion-item summary::-webkit-details-marker { display: none; }
+        .accordion-item summary::after { content: '▼'; position: absolute; right: 20px; transition: transform 0.3s; }
+        .accordion-item[open] summary { background-color: #e6f0ff; color: var(--primary-color); }
+        .accordion-item[open] summary::after { transform: rotate(180deg); }
+        .accordion-content { padding: 15px; background-color: white; }
+
+        /* --- Footer & Final Section --- */
+        .homework-section { background-color: var(--primary-color); color: white; }
+        .homework-section h2, .homework-section h4 { color: white; }
+        .homework-section h2 .highlight { color: var(--primary-color); }
+        .final-cheer { text-align: center; font-size: 1.5rem; font-weight: 700; color: var(--accent-color); margin-top: 20px; }
+        footer { text-align: center; padding: 20px; font-size: 0.9em; color: #777; }
+
+        /* --- Animation & Responsive --- */
+        .fade-in-section { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .highlight { font-size: 1.6rem; }
+            section { padding: 20px; }
+            .flip-card-container { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1>擺脫中式英文！</h1>
+            <p class="subtitle">像母語者一樣自然思考與表達的秘密</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="fade-in-section">
+            <h2>前言：你是否也曾「卡住」？</h2>
+            <p>你是否也曾遇到這種情況：心裡想著一句完美的中文，逐字逐句翻成英文後，說出口卻感覺「怪怪的」？或者，當你想說「發財」、「孝順」或「辛苦了」的時候，腦袋總是一片空白，找不到那個「對應」的單字？</p>
+            <p>如果答案是肯定的，那麼恭喜你，你來對地方了。問題不在於你的單字量，而在於我們還在試圖用「中文的邏輯」去駕駛「英文」這輛車。這堂課，就是要帶你換掉腦中的作業系統，安裝一套全新的「英文思維」。</p>
+        </section>
+
+        <section class="fade-in-section">
+            <h2><span class="highlight">第一站</span> 為什麼直翻行不通？從「發財」看文化鴻溝</h2>
+            <p>母語者會根據**情境**選擇完全不同的說法。來試試看你懂了嗎？</p>
+            <div class="interactive-quiz">
+                <h4>情境小測驗：</h4>
+                <p class="question">你的朋友買彩券中了大獎，你該怎麼形容他？</p>
+                <div class="quiz-options">
+                    <button class="quiz-option" data-correct="false">He made a fortune.</button>
+                    <button class="quiz-option" data-correct="true">He struck it rich!</button>
+                    <button class="quiz-option" data-correct="false">He is loaded.</button>
+                </div>
+                <p class="quiz-feedback"></p>
+            </div>
+            <p class="key-takeaway">英文思考的第一步，就是放棄尋找「唯一正確答案」，而是學會「描述情境」。</p>
+        </section>
+
+        <section class="fade-in-section">
+            <h2><span class="highlight">第二站</span> 那些中文獨有的溫柔，英文怎麼說？</h2>
+            <p>很多我們習以為常的詞，都帶有深刻的中文文化烙印。點擊下方的卡片，看看它們在不同情境下如何表達：</p>
+            
+            <div class="flip-card-container">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">孝順</div>
+                        <div class="flip-card-back">
+                            <h4>孝順 (具體行動)</h4>
+                            <p>"I went home <strong>to be with my folks</strong>."</p>
+                            <p>"It's important for me <strong>to take care of my parents</strong>."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">辛苦了</div>
+                        <div class="flip-card-back">
+                            <h4>辛苦了 (表達感謝/理解)</h4>
+                            <p>(對同事) "<strong>Thanks for all your hard work on this.</strong>"</p>
+                            <p>(看到朋友加班) "<strong>I know it's been a long day.</strong>"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">加油</div>
+                        <div class="flip-card-back">
+                            <h4>加油 (給予鼓勵)</h4>
+                            <p>"<strong>You got this!</strong>"</p>
+                            <p>"<strong>Hang in there.</strong>"</p>
+                            <p>"<strong>I'm rooting for you!</strong>"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toolkit-box">
+                <h3>🛠️ 你的思維工具箱：六種改寫策略</h3>
+                <ol>
+                    <li><strong>具體化</strong>：將抽象概念轉化為實際行動。</li>
+                    <li><strong>情境化</strong>：描述當下的感受、對象與場合。</li>
+                    <li><strong>語塊化</strong>：使用母語者常用的詞語搭配。</li>
+                    <li><strong>範疇調整</strong>：概念太廣就說細一點，太細就說通用一點。</li>
+                    <li><strong>例證法</strong>：用一個例子來解釋你的意思。</li>
+                    <li><strong>借詞加解釋</strong>：用正式詞，然後補一句簡單的解釋。</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="fade-in-section">
+            <h2><span class="highlight">第三站</span> 別再拼湊單字！用「語塊」組合句子</h2>
+            <p>流利的人思考時，不是一個字一個字地想，而是一塊一塊地想。這些「語塊 (Chunks)」就是英文的樂高積木，讓你的表達更快速、更道地。</p>
+            
+            <h4>常用語塊庫：</h4>
+            <ul>
+                <li><strong>表達思考：</strong> I'm trying to <strong>wrap my head around</strong> this concept.</li>
+                <li><strong>社交與請求：</strong> <strong>I'd appreciate it if you could</strong> send me the file.</li>
+                <li><strong>給予建議：</strong> <strong>You might want to</strong> double-check the numbers.</li>
+                <li><strong>表達選擇：</strong> <strong>I'm leaning toward</strong> the blue one.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in-section">
+            <h2><span class="highlight">第四站</span> 偵測並消除你的「翻譯腔」</h2>
+            <p>「翻譯腔」就是那些文法沒錯，但聽起來像機器人的句子。點擊下方的開關，看看如何一鍵優化！</p>
+            
+            <div class="toggle-container">
+                <div class="toggle-item">
+                    <div class="texts">
+                        <p class="before"><strong>翻譯腔：</strong>Please allow me to make a suggestion.</p>
+                        <p class="after"><strong>自然說法：</strong>Can I suggest something? / Hey, maybe try this…</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-item">
+                    <div class="texts">
+                        <p class="before"><strong>翻譯腔：</strong>I will immediately proceed to handle the matter.</p>
+                        <p class="after"><strong>自然說法：</strong>I'll get right on it. / I'll take care of it right away.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in-section">
+            <h2><span class="highlight">最終站</span> 挑戰中文熱門詞！</h2>
+            <p>當你想跟外國朋友解釋新潮的中文詞彙時，訣竅是：<strong>放棄翻譯，開始描述。</strong> 點開下面的詞彙看看吧！</p>
+            
+            <details class="accordion-item">
+                <summary>內捲 (Cutthroat competition)</summary>
+                <div class="accordion-content">
+                    It's like this endless, cutthroat competition where everyone is trying to outdo one another for no real gain.
+                </div>
+            </details>
+            <details class="accordion-item">
+                <summary>躺平 (Opting out of the rat race)</summary>
+                <div class="accordion-content">
+                    It means opting out of the rat race. You just do the bare minimum and refuse to overwork yourself.
+                </div>
+            </details>
+            <details class="accordion-item">
+                <summary>儀式感 (Making it feel special)</summary>
+                <div class="accordion-content">
+                    I like to light a candle when I read. It's about making a little ritual out of it, to make it feel special.
+                </div>
+            </details>
+        </section>
+
+        <section class="fade-in-section homework-section">
+            <h2>你的旅程才剛開始</h2>
+            <p>今天，我們學習的不是一堆單字，而是一套全新的「說話系統」。下一次你想表達時，請先抑制住腦中第一個跳出來的中文，練習用英文思維主導。</p>
+            <h4>給你的回家作業：</h4>
+            <ol>
+                <li>試著用手機錄下一分鐘的英文語音，講講你今天做了什麼，並刻意使用今天學到的至少 5 個語塊。</li>
+                <li>觀察你的生活，找出三個「中文有，但英文很難找到完美對應」的詞，並試著用「描述」的方式，寫下兩三句英文來解釋它。</li>
+            </ol>
+            <p class="final-cheer">You got this!</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Created for澤享's English Thinking Course</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Scroll Fade-in Animation Logic
+            const sections = document.querySelectorAll('.fade-in-section');
+            if (sections.length > 0) {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                };
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            }
+
+            // 2. Interactive Quiz Logic
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            const quizFeedback = document.querySelector('.quiz-feedback');
+            if (quizOptions.length > 0 && quizFeedback) {
+                let quizAnswered = false;
+                quizOptions.forEach(button => {
+                    button.addEventListener('click', () => {
+                        if (quizAnswered) return; // Prevent multiple answers
+
+                        quizAnswered = true;
+                        const isCorrect = button.dataset.correct === 'true';
+
+                        if (isCorrect) {
+                            button.classList.add('correct');
+                            quizFeedback.textContent = '答對了！「Strike it rich」最適合形容靠運氣突然致富的情境。';
+                            quizFeedback.className = 'quiz-feedback correct';
+                        } else {
+                            button.classList.add('incorrect');
+                            quizFeedback.textContent = '再想一下喔！這個選項不太適合這個情境。';
+                            quizFeedback.className = 'quiz-feedback incorrect';
+                            // Highlight the correct answer
+                            document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+                        }
+                    });
+                });
+            }
+
+            // 3. Flip Card Logic
+            const flipCards = document.querySelectorAll('.flip-card');
+            if (flipCards.length > 0) {
+                flipCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        card.classList.toggle('is-flipped');
+                    });
+                });
+            }
+            
+            // 4. Toggle Switch Logic
+            const toggleItems = document.querySelectorAll('.toggle-item');
+            if (toggleItems.length > 0) {
+                toggleItems.forEach(item => {
+                    const checkbox = item.querySelector('input[type="checkbox"]');
+                    checkbox.addEventListener('change', () => {
+                        if (checkbox.checked) {
+                            item.classList.add('toggled');
+                        } else {
+                            item.classList.remove('toggled');
+                        }
+                    });
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
