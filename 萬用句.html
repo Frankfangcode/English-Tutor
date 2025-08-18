@@ -202,7 +202,7 @@
             </div>
             <div class="practice-controls">
                 <button id="next-item-btn">換一句/換一詞</button>
-                <button id="toggle-translation-btn">顯示/隱藏翻譯</button>
+                <button id="toggle-translation-btn">顯示/隱藏英文</button>
             </div>
         </section>
         <main>
@@ -502,9 +502,9 @@
             }
         });
 
-        let currentTranslationElement;
+        let currentEnglishElement;
 
-        // 2. 顯示隨機項目的函式
+        // 2. 顯示隨機項目的函式 (邏輯修改)
         function showRandomItem() {
             if (practiceItems.length === 0) {
                 displayElement.innerHTML = '<p>沒有可練習的項目。</p>';
@@ -513,23 +513,24 @@
             const randomIndex = Math.floor(Math.random() * practiceItems.length);
             const item = practiceItems[randomIndex];
             
+            // 現在先顯示中文，英文隱藏
             displayElement.innerHTML = `
-                <h3>${item.english}</h3>
-                <p class="hidden">${item.chinese}</p>
+                <h3>${item.chinese}</h3>
+                <p class="hidden">${item.english}</p>
             `;
-            currentTranslationElement = displayElement.querySelector('p');
+            currentEnglishElement = displayElement.querySelector('p');
         }
 
-        // 3. 切換翻譯顯示/隱藏的函式
-        function toggleTranslation() {
-            if (currentTranslationElement) {
-                currentTranslationElement.classList.toggle('hidden');
+        // 3. 切換英文顯示/隱藏的函式 (邏輯修改)
+        function toggleEnglish() {
+            if (currentEnglishElement) {
+                currentEnglishElement.classList.toggle('hidden');
             }
         }
 
         // 4. 綁定事件監聽器
         nextBtn.addEventListener('click', showRandomItem);
-        toggleBtn.addEventListener('click', toggleTranslation);
+        toggleBtn.addEventListener('click', toggleEnglish);
 
         // 5. 初始載入時顯示一個項目
         showRandomItem();
